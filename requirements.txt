@@ -11,3 +11,5 @@ groq
 openai
 pandas
 numpy
+python-dotenv
+ipywidgets
