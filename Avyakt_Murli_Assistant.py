@@ -1,15 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-#get_ipython().system('pip install transformers==4.35.0 sentence-transformers==2.2.2 torch --quiet')
-
-
-# In[2]:
-
-
 import fitz
 import chromadb
 import os
@@ -18,24 +6,15 @@ from groq import Groq
 from IPython.display import display, HTML, clear_output
 import ipywidgets as widgets
 
-print("✅ All packages imported successfully!")
-
-
-# In[3]:
-
-
-# ── Configuration ──
-
-# Your Groq API Key
 from dotenv import load_dotenv
 import os
 
 
 load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")  # ← paste your key here # ← paste your key here
+GROQ_API_KEY = os.getenv("GROQ_API_KEY") 
 
 # PDF Path
-PDF_PATH = "/Users/v/Desktop/Avyakt Murli Assistant/Murli.pdf"
+PDF_PATH = "Murli.pdf"
 
 # ChromaDB Path
 CHROMA_PATH = "chroma_db"
@@ -59,16 +38,6 @@ client = Groq(api_key=GROQ_API_KEY)
 # ── Initialize ChromaDB ──
 chroma_client = chromadb.PersistentClient(path=CHROMA_PATH)
 
-print("✅ Configuration done!")
-print(f"📄 PDF: {PDF_PATH}")
-print(f"🗄️  Database: {CHROMA_PATH}")
-print(f"🤖 Model: {GROQ_MODEL}")
-
-
-# In[4]:
-
-
-# ── Cell 3: PDF Processing ──
 
 def extract_text_from_pdf(pdf_path):
     """Extract all text from PDF file"""
@@ -236,7 +205,7 @@ def retrieve_context(query, n_results=TOP_K_RESULTS):
 def generate_answer(query, context):
     """Generate answer using Groq LLM"""
     
-    prompt = f"""You are an Awesome Murli teaching assistant.
+    prompt = f"""You are an Assistant of Shiv Baba.
 
 Use ONLY the context provided below to answer the question.
 If the answer is not in the context, say "I couldn't find this in the Available set of Murli."
@@ -403,17 +372,5 @@ project_summary = {
 
 with open("project_summary.json", "w") as f:
     json.dump(project_summary, f, indent=4)
-
-print("✅ Project summary saved to project_summary.json")
-print("✅ ChromaDB saved to chroma_db/ folder")
-print("✅ Notebook saved — Ctrl+S to save notebook")
-print("\n🚀 Your project is ready for:")
-print("   • Resume showcase")
-print("   • GitHub upload")
-print("   • Interview demonstration")
-
-
-
-
 
 
